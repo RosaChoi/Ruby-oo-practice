@@ -22,4 +22,26 @@ RSpec.describe HighSchool do
     expect(high_school.students).to eq(["Lindsay Weir", "Sam Weir", "Daniel Desario"])
   end
 
+  it "it removes students when students drop out and adds them to the drop_outs" do
+    high_school = HighSchool.new(100)
+
+    high_school.enroll("Lindsay Weir")
+    high_school.enroll("Daniel Desario")
+
+    high_school.drop_out("Daniel Desario")
+    expect(high_school.dropped_out).to eq(["Daniel Desario"])
+    expect(high_school.students).to eq(["Lindsay Weir"])
+  end
+
+  it "it removes students when students graduate and adds them to the alumni" do
+    high_school = HighSchool.new(100)
+
+    high_school.enroll("Lindsay Weir")
+    high_school.enroll("Daniel Desario")
+
+    high_school.graduate("Lindsay Weir")
+    expect(high_school.alumni).to eq(["Lindsay Weir"])
+    expect(high_school.students).to eq(["Daniel Desario"])
+  end
+
 end
